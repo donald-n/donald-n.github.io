@@ -1,0 +1,112 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+html,
+body {
+    	height: 100%;
+    	width: 100%;
+    	background-color: --dark-gray;
+}
+
+body {
+    	padding-top: 80px;
+}
+
+/* Navigation Bar */
+.navbar {
+    background: #6d6343;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    box-shadow: 0 0 10px 0 #09090a;
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    backdrop-filter: blur(16px) saturate(180%);
+}
+
+.navbar__container {
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    z-index: 1;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 50px;
+}
+
+.navbar__menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+
+.navbar__item {
+    height: 80px;
+}
+
+.navbar__links {
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 125px;
+    text-decoration: none;
+    height: 100%;
+}
+
+.navbar__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0 0 1rem;
+    width: 100%;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    padding: 10px 20px;
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border-radius: 999px;
+    background: var(--orange);
+    color: #ffffff;
+    transition: 0.4s background ease;
+}
+
+.button:hover {
+    background: var(--dark-orange);
+    transition: 0.4s background ease;
+}
+
+.navbar__links:hover {
+	color: var(--light-orange);
+	transition: 0.4s color ease;
+	background-color: --gray;
+}
+
+.page-container {
+    padding: 10px;
+    width: 100%;
+    height: 75%;
+    background-color: rgb(255, 224, 165);
+    background-image: url("assets/smile.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
