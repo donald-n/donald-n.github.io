@@ -1,14 +1,5 @@
 var games = {
-	'snake': [
-		'Snake',
-		'',
-		'<html><div id="score_dis">Score: 0</div><canvas class="board" id="snakeboard" width="600px" height="600px"></canvas>'
-	],
-	'snake2': [
-		'Snake',
-		'<p>hello</p>',
-		'<html><div id="score_dis">Score: 0</div><canvas class="board" id="snakeboard" width="500px" height="500px"></canvas>'
-	]
+	'snake': '<td><a href="snake.html"><img src="imgs/snake.png" class="game-img"></a></td>',
 }
 
 var defaultUrl = "./game/snake.js"

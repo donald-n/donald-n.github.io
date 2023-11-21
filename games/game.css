@@ -1,15 +1,17 @@
 .side-bar {
 	position: absolute;
-	padding-top: 100px;
 	width: 20%;
 	text-align: left;
 	padding: 10px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 	align-items: center;
 	background-color: var(--yellow);
+	overflow-y: scroll;
+	height: 100vh;
 }
 
 .side-bar table {
-	overflow: auto;
 }
 
 .game-img {
@@ -17,7 +19,14 @@
 }
 
 .game-container {
-	margin-left: 35%;
+	margin-left: 30%;
+}
+
+.game-content {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
 }
 
 .description {
