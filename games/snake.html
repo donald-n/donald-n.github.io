@@ -1,15 +1,47 @@
 <!DOCTYPE html>
-<hmtl>
+<html>
 <head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" src="/style.css" />
-  <link rel="stylesheet" src="./game.css" />
-  <title>Getting Smarter: 101 ways</title>
+  <title>the blank game | donald n</title>
+  <link rel="stylesheet" href="C:/coding_stuff/html_stuff/assignments/donaldneusplukker.github.io-main/style.css"/>
+  <link rel="stylesheet" href="game.css"/>
 </head>
-<body class="background">
-  <div id="score_dis">Score: 0</div>
-  <canvas class="board" id="snakeboard" width="700px" height="700px"></canvas>
-  <script type="text/javascript" src="./snake.js"></script>
-  </body>
+<body>
+  <nav class="navbar">
+    <ul class="navbar-menu">
+      <li class="navbar-item">
+        <a href="/index.html" class="navbar-links">home</a>
+      </li>
+      <li class="navbar-item">
+        <a href="/game.html" class="navbar-links">games</a>
+      </li>
+      <li class="navbar-item">
+        <a href="/blog.html" class="navbar-links">blog</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="page-container">
+    <div class="side-bar">
+      <table>
+        <td>
+          <a href="snake.html"><img src="imgs/snake.png" class="game-img"></a>
+        </td>
+        <td>
+          <a href="snake.html"><img src="imgs/snake.png" class="game-img"></a>
+        </td>
+      </table>
+    </div>
+    <br>
+    <div class="game-container">
+      <div id="score_dis">Score: 0</div>
+      <canvas class="board" id="snakeboard" width="500px" height="500px"></canvas>
+      <div class="description">
+        <h2>How to play</h2>
+        <p><b>Movement:</b> Arrow keys</p>
+      </div>
+      <script type="text/javascript" src="./snake.js"></script>
+    </div>
+  </div>
+</body>
+
+  
 </html>

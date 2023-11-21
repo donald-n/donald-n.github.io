@@ -12,6 +12,7 @@ let snake = [
 ]
 
 let score = 0;
+let speed = 55;
 let changing_direction = false;
 let food_x;
 let food_y;
@@ -56,7 +57,7 @@ function main() {
   if (has_game_ended()) {
     reset();
   }
-  if (snake.length > 300) {
+  if (score == 1000) {
   	alert("You have won the game of Snake!");
     reset();
   }
@@ -68,7 +69,7 @@ function main() {
     move_snake();
     drawSnake();
     main();
-  }, 100)
+  }, speed)
 }
 
 function clearCanvas() {
