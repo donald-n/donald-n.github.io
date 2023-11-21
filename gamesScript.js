@@ -11,14 +11,17 @@ var games = {
 	]
 }
 
-var head = document.getElementsByTagName('head')[0];
-var script = document.createElement('script');
-script.type = 'text/javascript';
-head.appendChild(script);
+var defaultUrl = "./game/snake.js"
 
 function loadScript(url) {
-    script.src = url;
-    head.appendChild(script);
+    const newScript = document.createElement('script')
+	const script = document.getElementById("gameScript");
+	console.log(script)
+	newScript.type = 'text/javascript';
+	newScript.src = url;
+	newScript.id = "gameScript";
+	script.parentNode.insertBefore(newScript, script.nextSibling);
+	script.parentNode.removeChild(script);
 }
 
 function replaceGame(game) {

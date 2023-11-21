@@ -19,6 +19,8 @@ let dx = 10;
 let dy = 0;
 let grow = 5;
 
+var running = true;
+
 const snakeboard = document.getElementById("snakeboard");
 const snakeboard_ctx = snakeboard.getContext("2d");
 
@@ -42,8 +44,15 @@ function reset() {
   score_dis.innerHTML = "Score: "+score;
 }
 
+function terminate() {
+  running = false;
+  document.removeEventListener("keydown", change_direction);
+}
+
 function main() {
-  console.log('here');
+  if (!running)
+    return;
+
   if (has_game_ended()) {
     reset();
   }
