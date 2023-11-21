@@ -1,0 +1,20 @@
+.background {
+  background: #000000;
+}
+
+#score_dis {
+  font-family: sans-serif;
+  font-size: 25px;
+  color: white;
+  font: monospace;
+}
+
+#snakeboard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  border-color: blue;
+  border-style: solid;
+}
