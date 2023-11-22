@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>guess the number | donald n</title>
+	<link rel="shortcut icon" href="/assets/favicon.ico">
+	<link rel="stylesheet" href="https://donaldneusplukker.github.io/style.css"/>
+	<link rel="stylesheet" href="game.css"/>
+	<script type="text/javascript" src="https://donaldneusplukker.github.io/script.js"></script>
+	<script src="random-number.js"></script>
+	<style>
+		.number-game {
+			padding-top: 30%;
+			justify-content: center;
+			text-align: center;
+			width: 500px;
+			height: 500px;
+			background-color: var(--light-gray);
+			border-radius: 20px;
+		}
+		button, input {
+			background-color: black;
+			color: white;
+			padding-left: 5px;
+			padding-right: 5px;
+			padding-top: 2px;
+			padding-bottom: 2px;
+			border-radius: 10px;
+		}
+	</style>
+</head>
+<body onload="getNumber();">
+	<script type="text/javascript">genNavBar();</script>
+	<div class="page-container">
+		<div class="side-bar">
+			<table id="gamesList">
+				<script type="text/javascript" src="gamesScript.js"></script>
+			</table>
+		</div>
+		<br>
+		<div class="game-container">
+			<div class="game-content">
+				<div class="number-game">
+				<h1>guess the number</h1>
+				<br>
+				<input type="number" placeholder="guess a number" id="player-guess">
+				<button onclick="checkNumber();">submit</button>
+				<br><br><p id="teller">enter a number and press submit</p><br>
+				<button onclick="getNumber();">play again/restart</button>
+				</div>
+			</div>
+			<div class="description">
+				<br>
+				<h2>choose your range of numbers</h2>
+				<label for="max-number">enter a number to go to:</label>
+				<input type="number" value=100 id="max-number" />
+				<button onclick="getNumber();">submit</button>
+				<p style="font-size: .8rem">You can choose what your range of numbers is in the field above.</p>
+				<br/>
+				<h2>how to play</h2>
+				<p>try to guess the number between 1, and whatever number you want.
+				   see if you can beat your score, and try to use the least amount
+				   of guesses possible.
+				</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

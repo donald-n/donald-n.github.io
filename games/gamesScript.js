@@ -1,5 +1,7 @@
 var games = {
-	'snake': '<td><a href="snake.html"><img src="imgs/snake.png" class="game-img"></a></td>',
+	'0': '<td><a href="snake.html"><img src="imgs/snake.png" class="game-img"></a></td>',
+	'1': '<td><a href="random-number.html"><img src="imgs/guess-the-number.png" class="game-img"></a></td>',
+	'2': '<td><a href="cube.html"><img src="imgs/cube.png" class="game-img"></a></td>',
 }
 
 const gamesList = document.getElementById("gamesList");
@@ -16,7 +18,6 @@ function makeGamesList() {
 				rowsList.push(row);
 			}
 		} else if (iter == 1) {
-			console.log('here');
 			row += value;
 			rowsList.push(row);
 			iter = 0;
