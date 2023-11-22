@@ -64,7 +64,7 @@ function main() {
     reset();
   }
   if (score == 1000) {
-  	alert("You have won the game of Snake!");
+  	alert("you have won the game of snake!");
     reset();
   }
 

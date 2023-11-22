@@ -4,82 +4,26 @@
 	<title>the blank game | donald n</title>
 	<link rel="stylesheet" href="https://donaldneusplukker.github.io/style.css"/>
 	<link rel="stylesheet" href="game.css"/>
+	<script type="text/javascript" src="https://donaldneusplukker.github.io/script.js"></script>
 </head>
 <body>
-	<nav class="navbar">
-		<ul class="navbar-menu">
-			<li class="navbar-item">
-				<a href="/" class="navbar-links">home</a>
-			</li>
-			<li class="navbar-item">
-				<a href="/game" class="navbar-links">games</a>
-			</li>
-			<li class="navbar-item">
-				<a href="/blog" class="navbar-links">blog</a>
-			</li>
-		</ul>
-	</nav>
+	<script type="text/javascript">genNavBar();</script>
 	<div class="page-container">
 	<div class="side-bar">
-		<table>
-			<tr>
-				<td><a href="snake.html"><img src="imgs/snake.png" class="game-img"></a></td>
-				<td>
-					<a href="snake.html"><img src="imgs/snake.png" class="game-img"></a>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<a href="snake.html"><img src="imgs/snake.png" class="game-img"></a>
-				</td>
-				<td>
-					<a href="snake.html"><img src="imgs/snake.png" class="game-img"></a>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<a href="snake.html"><img src="imgs/snake.png" class="game-img"></a>
-				</td>
-				<td>
-					<a href="snake.html"><img src="imgs/snake.png" class="game-img"></a>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<a href="snake.html"><img src="imgs/snake.png" class="game-img"></a>
-				</td>
-				<td>
-					<a href="snake.html"><img src="imgs/snake.png" class="game-img"></a>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<a href="snake.html"><img src="imgs/snake.png" class="game-img"></a>
-				</td>
-				<td>
-					<a href="snake.html"><img src="imgs/snake.png" class="game-img"></a>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<a href="snake.html"><img src="imgs/snake.png" class="game-img"></a>
-				</td>
-				<td>
-					<a href="snake.html"><img src="imgs/snake.png" class="game-img"></a>
-				</td>
-			</tr>
+		<table id="gamesList">
+			<script type="text/javascript" src="gamesScript.js"></script>
 		</table>
 	</div>
 	<br>
 	<div class="game-container">
 		<div class="game-content">
-			<p id="score_dis">Score: 0</p>
+			<p id="score_dis">score: 0</p>
 			<canvas class="board" id="snakeboard" width="500px" height="500px"></canvas>
 		</div>
 		<div class="description">
-			<h2>How to play</h2>
-			<p><b>Movement:</b> Arrow keys</p>
-			<p><b>Objective:</b> Eat the blue dot, and beat the game when you get to 1000 points!</p>
+			<h2>how to play</h2>
+			<p><b>movement:</b> arrow keys</p>
+			<p><b>objective:</b> eat the blue dot, and beat the game when you get to 1000 points!</p>
 		</div>
 		<script type="text/javascript" src="./snake.js"></script>
 	</div>

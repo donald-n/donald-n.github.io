@@ -3,6 +3,7 @@
     --yellow: #ffca18;
     --dark-yellow: #c59f1f;
     --light-yellow: #ffeaa5;
+    --light-gray: #9f9f9f;
 }
 
 * {
@@ -24,7 +25,7 @@ body {
 }
 
 /* Navigation Bar */
-.navbar {
+nav {
     background: var(--yellow);
     height: 70px;
     display: flex;
@@ -107,4 +108,46 @@ body {
 .home-part {
     width:50%;
     padding: 20px;
+}
+
+/* Game Page */
+#gameContainer {
+    padding: 30px;
+    margin: 5%;
+    margin-left: 12.5%;
+    margin-right: 12.5%;
+    background: var(--light-gray);
+    border-radius: 10px;
+}
+
+ol {
+    list-style: none;
+    margin: 5%;
+    margin-top: 2.5%;
+}
+
+.search-bar input[type=text] {
+    padding: 10px;
+    width: 98%;
+    border-radius: 20px;
+    border: none;
+}
+
+.game {
+    padding: 20px;
+    margin: 20px;
+    background: var(--yellow);
+    border-radius: 10px;
+}
+
+ol a {
+    color: black;
+    text-decoration: none;
+}
+
+.game:hover {
+    transition: 0.4s color ease;
+    transition: 0.6s background ease;
+    background: var(--dark-yellow);
+    color: white;
 }
