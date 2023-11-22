@@ -36,6 +36,11 @@ main();
 gen_food();
 document.addEventListener("keydown", change_direction);
 
+function setSpeed() {
+  var speedSet = document.getElementById('speedInput').value;
+  speed = speedSet;
+}
+
 function reset() {
   snake = [
   {x: 300, y: 300},
@@ -63,7 +68,7 @@ function main() {
   if (has_game_ended()) {
     reset();
   }
-  if (score == 1000) {
+  if (score == 500) {
   	alert("you have won the game of snake!");
     reset();
   }
