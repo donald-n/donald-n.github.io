@@ -53,7 +53,7 @@ function reset() {
   dy = 0;
   score = 0;
   let score_dis = document.getElementById("score_dis");
-  score_dis.innerHTML = "Score: "+score;
+  score_dis.innerHTML = "score: "+score;
 }
 
 function main() {

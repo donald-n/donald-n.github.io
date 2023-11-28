@@ -20,8 +20,7 @@
 
 .game-container {
 	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
+	margin-top: 0;
 	margin-left: 30%;
 }
 
