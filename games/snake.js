@@ -1,7 +1,7 @@
 const board_border = 'white';
 const board_background = "black";
 const snake_col = '#f4ff00';
-const snake_border = 'white';
+const snake_border = '#f4ff00';
 
 let snake = [
 {x: 300, y: 300},
@@ -56,15 +56,7 @@ function reset() {
   score_dis.innerHTML = "Score: "+score;
 }
 
-function terminate() {
-  running = false;
-  document.removeEventListener("keydown", change_direction);
-}
-
 function main() {
-  if (!running)
-    return;
-
   if (has_game_ended()) {
     reset();
   }
@@ -179,5 +171,5 @@ function move_snake() {
     gen_food();
   } else {
       snake.pop();
-    }
+  }
 }
