@@ -41,6 +41,11 @@ function setSpeed() {
   speed = speedSet;
 }
 
+function setSpeed() {
+  var growSet = document.getElementById('growInput').value;
+  grow = growSet;
+}
+
 function reset() {
   snake = [
   {x: 300, y: 300},

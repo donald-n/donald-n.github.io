@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>snake | donald n</title>
+	<title>boxman | donald n</title>
 	<link rel="shortcut icon" href="/assets/favicon.ico">
 	<link rel="stylesheet" href="https://donald-n.github.io/style.css"/>
 	<link rel="stylesheet" href="game.css"/>
@@ -18,18 +18,14 @@
 	<br>
 	<div class="game-container">
 		<div class="game-content">
-			<p id="score_dis">score: 0</p>
-			<canvas class="board" id="snakeboard" width="500px" height="500px"></canvas>
+			<canvas class="board" id="board" width="500px" height="500px"></canvas>
 		</div>
 		<div class="description">
 			<h2>how to play</h2>
 			<p><b>movement:</b> arrow keys</p>
-			<p><b>objective:</b> eat the blue dot, and beat the game when you get to 500 points!</p><br>
-			<h2>settings</h2>
-			<p><b>speed: </b><input type="number" placeholder="enter a speed..." id="speedInput" onkeyup="setSpeed();"> <button onclick="setSpeed();">set</button></p>
-			<p><b>grow amount: </b><input type="number" placeholder="enter an amount..." id="growInput" onkeyup="setGrow();"> <button onclick="setGrow();">set</button></p>
+			<p><b>objective:</b> get to the top</p><br>
 		</div>
-		<script type="text/javascript" src="./snake.js"></script>
+		<script type="text/javascript" src="./boxman.js"></script>
 	</div>
 </div>
 </body>
