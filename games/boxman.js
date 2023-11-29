@@ -116,14 +116,11 @@ function movePlayer(event) {
 	let onBlock = false;
 	for (const [row, blockList] of Object.entries(blocks)) {
 		if (player.x / 25 == row) {
-			console.log(19 - (player.y / 25));
-			console.log(blockList.length);
 			if (blockList.length - (19 - (player.y / 25)) <= 1) {
 				onBlock = true;
 				player.y = 475 - (blockList.length * 25);
 				break;
 			} else {
-				console.log('here');
 				player.x += 25 * dir;
 			}
 		}
