@@ -14,22 +14,36 @@ const block_border = "#4fe567";
 
 const canvas = document.getElementById("board");
 const ctx = canvas.getContext("2d");
+ctx.font = "16px sans-serif";
 
-let droppingBlock = {};
-let blocks = [];
+let score = 0;
+let droppingBlock;
+let blocks;
+
+function resetBlocks() {
+	blocks = {
+		0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7: [], 8: [], 9: [], 10: [], 11: [], 12: [], 13: [], 14: [], 15: [], 16: [], 17: [], 18: [], 19: []
+	};
+	droppingBlock = {};
+}
+resetBlocks();
 
 var dir = 0;
 let player = {x: 0, y: 475};
 
 function clearCanvas() {
-  ctx.fillStyle = board_background;
-  ctx.strokestyle = board_border;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.strokeRect(0, 0, canvas.width, canvas.height);
+	ctx.fillStyle = board_background;
+	ctx.strokestyle = board_border;
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 }
 
 function drawBlocks() {
-	blocks.forEach(drawBlock);
+	for (const [row, blockList] of Object.entries(blocks)) {
+		for (block of blockList) {
+			drawBlock(block);
+		}
+	}
 	drawBlock(droppingBlock);
 }
 
@@ -41,10 +55,12 @@ function drawBlock(block) {
 }
 
 function dropBlock() {
+	var row = Math.round(Math.random() * 19);
 	if (Object.keys(droppingBlock).length === 0) {
 		droppingBlock = {
-			x: Math.round(Math.random() * 19) * 25,
-			y: 0
+			x: row * 25,
+			y: 0,
+			row: row - 1
 		};
 	}
 
@@ -52,15 +68,19 @@ function dropBlock() {
 		droppingBlock.y += 25
 	}
 	else if (droppingBlock.y >= 475) {
-		blocks.push(droppingBlock);
+		blocks[droppingBlock.row + 1].push(droppingBlock);
 		droppingBlock = {};
+		score += 19 - (player.y / 25);
 	}
 
-	for (block of blocks) {
-		if (droppingBlock.y === block.y && droppingBlock.x === block.x) {
-			droppingBlock.y = block.y - 25;
-			blocks.push(droppingBlock);
-			droppingBlock = {};
+	for (const [row, blockList] of Object.entries(blocks)) {
+		for (block of blockList) {
+			if (droppingBlock.x === block.x && droppingBlock.y === block.y) {
+				droppingBlock.y = block.y - 25;
+				blocks[droppingBlock.row + 1].push(droppingBlock);
+				droppingBlock = {};
+				score += 19 - (player.y / 25);
+			}
 		}
 	}
 }
@@ -68,47 +88,83 @@ function dropBlock() {
 function drawPlayer() {
 	ctx.fillStyle = player_col;
 	ctx.strokestyle = player_border;
-	ctx.fillRect(player.x, player.y, 25, 25);
-	ctx.strokeRect(player.x, player.y, 25, 25);
+	ctx.fillRect(player.x + 5, player.y + 10, 15, 15);
+	ctx.fillStyle = "black";
+	ctx.fillRect(player.x + 8, player.y + 13, 3, 3);
+	ctx.fillRect(player.x + 14, player.y + 13, 3, 3);
+	ctx.fillRect(player.x + 8, player.y + 21, 9, 2);
+	ctx.strokeRect(player.x + 5, player.y + 10, 15, 15);
 }
 
 function movePlayer(event) {
 	const LEFT_KEY = 37;
 	const RIGHT_KEY = 39;
 	const keyPressed = event.keyCode;
+	let dir = 0;
 
 	if (keyPressed === LEFT_KEY) {
 		if (player.x === 0) return;
-		player.x -= 25;
+		dir = 1;
 	}
 	else if (keyPressed === RIGHT_KEY) {
 		if (player.x === 475) return;
-		player.x += 25;
+		dir = -1;
 	}
 
-	for (block of blocks) {
-		if (player.x === block.x) {
-			player.y = block.y - 25;
-		} else {
-			console.log('here');
-			player.y = 475;
+	player.x += 25 * -dir;
+
+	let onBlock = false;
+	for (const [row, blockList] of Object.entries(blocks)) {
+		if (player.x / 25 == row) {
+			console.log(19 - (player.y / 25));
+			console.log(blockList.length);
+			if (blockList.length - (19 - (player.y / 25)) <= 1) {
+				onBlock = true;
+				player.y = 475 - (blockList.length * 25);
+				break;
+			} else {
+				console.log('here');
+				player.x += 25 * dir;
+			}
 		}
+	}
+	if (!onBlock) {
+		player.y = 475;
 	}
 
 }
 
-var blocksDrop = 0;
+function reset() {
+	player = {x: 0, y: 475};
+	score = 0;
+	resetBlocks();
+}
+
+let blockDropSpeed = 0;
 function main() {
-	blocksDrop += 1;
-	if (blocksDrop === 1) {
-		blocksDrop = 0;
+	blockDropSpeed += 1;
+	if (blockDropSpeed === 1) {
+		blockDropSpeed = 0;
 		dropBlock();
 	}
 
+	for (const [row, blockList] of Object.entries(blocks)) {
+		for (block of blockList) {
+			if (block.x === player.x && block.y === player.y) {
+				reset();
+			}
+		}
+	}
+
+	if (player.y === 0) {
+		reset();
+	}
+	ctx.fillStyle = "white";
+	ctx.fillText('score: ' + score, 6, 30);
 	setTimeout(function onTick() {
     	clearCanvas();
-    	drawBlocks();
     	drawPlayer();
+    	drawBlocks();
     	main();
     }, 100);
 }
