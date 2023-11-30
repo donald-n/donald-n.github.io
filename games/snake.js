@@ -194,7 +194,7 @@ function move_snake() {
     gen_food();
   } 
   else if (has_eaten_poison) {
-    for (f = 0; f < grow; f++) {
+    for (f = 0; f < grow+1; f++) {
       snake.pop();
     }
     score -= 10;
