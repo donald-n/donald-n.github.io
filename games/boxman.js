@@ -117,7 +117,6 @@ function movePlayer(event) {
 	for (const [row, blockList] of Object.entries(blocks)) {
 		if (player.x / 25 == row) {
 			if (blockList.length - (19 - (player.y / 25)) <= 1) {
-				onBlock = true;
 				player.y = 475 - (blockList.length * 25);
 				break;
 			} else {
@@ -125,10 +124,6 @@ function movePlayer(event) {
 			}
 		}
 	}
-	if (!onBlock) {
-		player.y = 475;
-	}
-
 }
 
 function reset() {
@@ -154,7 +149,21 @@ function main() {
 	}
 
 	if (player.y === 0) {
-		reset();
+		for (const [row, blockList] of Object.entries(blocks)) {
+			var legit = false;
+			if (blockList.length >= 18) {
+				legit = true;
+				alert("you won boxman!");
+				alert("this is something not many people see.");
+				alert("you may be wondering,");
+				alert("is this maniac gonna add end credits to a game that really doesn't need them??");
+				alert("and you would be correct.");
+				reset();
+			}
+		}
+		if (!legit) {
+			alert("you're just an annoying old person who thinks they're cool by going in the console. shame on you.");
+		}
 	}
 	ctx.fillStyle = "white";
 	ctx.fillText('score: ' + score, 6, 30);

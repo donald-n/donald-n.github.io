@@ -41,7 +41,7 @@ function setSpeed() {
   speed = speedSet;
 }
 
-function setSpeed() {
+function setGrow() {
   var growSet = document.getElementById('growInput').value;
   grow = growSet;
 }
@@ -66,7 +66,7 @@ function main() {
     reset();
   }
   if (score == 500) {
-  	alert("you have won the game of snake!");
+  	alert("you won snake!");
     reset();
   }
 

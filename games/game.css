@@ -11,6 +11,18 @@
 	height: 200vh;
 }
 
+button, input {
+	padding-left: 5px;
+	padding-right: 5px;
+	border-radius: 10px;
+	border: 2px solid black;
+}
+
+button {
+	color: black;
+	background-color: gray;
+}
+
 .game-img {
 	width: 90%;
 }
