@@ -23,7 +23,7 @@ function genNavBar() {
                 <a href="/game" class="navbar-links">games</a>
             </li>
             <li class="navbar-item">
-                <a href="/blog" class="navbar-links">blog</a>
+                <a href="www.youtube.com/@donaldnasplucker?sub_confirmation=1" class="navbar-links">youtube channel</a>
             </li>
         </ul>`
     document.body.insertBefore(navBar, document.body.firstChild);
