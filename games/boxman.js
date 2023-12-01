@@ -49,9 +49,7 @@ function drawBlocks() {
 
 function drawBlock(block) {
 	ctx.fillStyle = block_col;
-	ctx.strokestyle = block_border;
 	ctx.fillRect(block.x, block.y, 25, 25);
-	ctx.strokeRect(block.x, block.y, 25, 25);
 }
 
 function dropBlock() {
@@ -93,7 +91,6 @@ function drawPlayer() {
 	ctx.fillRect(player.x + 8, player.y + 13, 3, 3);
 	ctx.fillRect(player.x + 14, player.y + 13, 3, 3);
 	ctx.fillRect(player.x + 8, player.y + 21, 9, 2);
-	ctx.strokeRect(player.x + 5, player.y + 10, 15, 15);
 }
 
 function movePlayer(event) {
@@ -167,7 +164,7 @@ function main() {
 		reset();
 	}
 
-	ctx.fillStyle = "white";
+	ctx.fillStyle = "black";
 	ctx.fillText('score: ' + score, 6, 30);
 	setTimeout(function onTick() {
     	clearCanvas();
