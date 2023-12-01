@@ -132,11 +132,18 @@ function reset() {
 	resetBlocks();
 }
 
-let blockDropSpeed = 0;
+let blockDrop = 0;
+let blockDropSpeed = 5;
+
+function setSpeed() {
+	var speedSet = document.getElementById('speedInput').value;
+	blockDropSpeed = speedSet
+}
+
 function main() {
-	blockDropSpeed += 1;
-	if (blockDropSpeed === 1) {
-		blockDropSpeed = 0;
+	blockDrop += 1;
+	if (blockDrop === blockDropSpeed) {
+		blockDrop = 0;
 		dropBlock();
 	}
 
@@ -147,24 +154,24 @@ function main() {
 			}
 		}
 	}
-
-	if (player.y === 0) {
-		for (const [row, blockList] of Object.entries(blocks)) {
-			var legit = false;
-			if (blockList.length >= 18) {
-				legit = true;
-				alert("you won boxman!");
-				alert("this is something not many people see.");
-				alert("you may be wondering,");
-				alert("is this maniac gonna add end credits to a game that really doesn't need them??");
-				alert("and you would be correct.");
+	for (const [row, blockList] of Object.entries(blocks)) {
+		if (row == player.x/25) {
+			if (blockList.length != 19 - (player.y / 25)) {
+				alert("you are a wacko cheater that is probably named alex >:(");
 				reset();
 			}
 		}
-		if (!legit) {
-			alert("you're just an annoying old person who thinks they're cool by going in the console. shame on you.");
-		}
 	}
+
+	if (player.y === 0) {
+		alert("you won boxman!");
+		alert("this is something not many people see.");
+		alert("you may be wondering,");
+		alert("is this maniac gonna add end credits to a game that really doesn't need them??");
+		alert("and you would be correct.");
+		reset();
+	}
+
 	ctx.fillStyle = "white";
 	ctx.fillText('score: ' + score, 6, 30);
 	setTimeout(function onTick() {
@@ -172,7 +179,7 @@ function main() {
     	drawPlayer();
     	drawBlocks();
     	main();
-    }, 100);
+    }, 10);
 }
 
 main();

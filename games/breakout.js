@@ -4,7 +4,7 @@ const snake_col = '#f4ff00';
 const snake_border = '#f4ff00';
 
 
-let snake = [
+let level = [
 {x: 300, y: 300},
 {x: 290, y: 300},
 {x: 280, y: 300},
