@@ -6,7 +6,7 @@ window.addEventListener("keydown", function(e) {
 document.addEventListener("keydown", movePlayer);
 
 const board_border = 'white';
-const board_background = "black";
+const board_background = "#cce0ff";
 const player_col = "#4fe567";
 const player_border = "#4fe567";
 const block_col = "#4444ee";
@@ -135,14 +135,9 @@ function reset() {
 let blockDrop = 0;
 let blockDropSpeed = 5;
 
-function setSpeed() {
-	var speedSet = document.getElementById('speedInput').value;
-	blockDropSpeed = speedSet
-}
-
 function main() {
 	blockDrop += 1;
-	if (blockDrop === blockDropSpeed) {
+	if (blockDrop === 5) {
 		blockDrop = 0;
 		dropBlock();
 	}
