@@ -1,207 +1,150 @@
-const board_border = 'white';
-const board_background = "black";
-const snake_col = '#f4ff00';
-const snake_border = '#f4ff00';
-
-
-let level = [
-{x: 300, y: 300},
-{x: 290, y: 300},
-{x: 280, y: 300},
-{x: 270, y: 300},
-{x: 260, y: 300}
-]
-
-let score = 0;
-let speed = 55;
-let changing_direction = false;
-let food_x;
-let food_y;
-let poison_x;
-let poison_y;
-let dx = 10;
-let dy = 0;
-let grow = 5;
-
-var running = true;
-
-const snakeboard = document.getElementById("snakeboard");
-const snakeboard_ctx = snakeboard.getContext("2d");
-
 window.addEventListener("keydown", function(e) {
-    if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
-        e.preventDefault();
-    }
+		if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+				e.preventDefault();
+		}
 }, false);
+document.addEventListener("keydown", movePlayer);
 
-main();
+const tileSize = .5;
 
-gen_food();
-gen_poison();
-document.addEventListener("keydown", change_direction);
+const board_border = 'black';
+const board_background = "black";
+const player_col = "#00db4d";
+const player_border = "black";
+const block_col = "#4444ee";
+const block_border = "black";
+const ballColor = "#ffffff";
 
-function setSpeed() {
-  var speedSet = document.getElementById('speedInput').value;
-  speed = speedSet;
+const canvas = document.getElementById("board");
+const ctx = canvas.getContext("2d");
+
+let level = 1;
+let ball = {
+	x: 250,
+	y: 250,
+	hitBoxSize: 8
+};
+let ballDirX = 10;
+let ballDirY = 3;
+const blockWidth = 30;
+const blockHeight = 8;
+
+let levelOne = [
+	{x: 0, y: 110, hit: false}
+];
+
+function drawLevel() {
+	for (block of levelOne) {
+		drawBlock(block);
+	}
 }
 
-function setGrow() {
-  var growSet = document.getElementById('growInput').value;
-  grow = growSet;
+function drawBall() {
+	ctx.fillStyle = ballColor;
+	ctx.fillRect(ball.x+2, ball.y, 4, 1);
+	ctx.fillRect(ball.x+1, ball.y+1, 6, 1);
+	ctx.fillRect(ball.x, ball.y+2, 8, 4);
+	ctx.fillRect(ball.x+1, ball.y+6, 6, 1);
+	ctx.fillRect(ball.x+2, ball.y+7, 4, 1);
+}
+
+function moveBall() {
+	if (ball.x <= 0 || ball.x + ball.hitBoxSize >= 500) {
+		ballDirX = -ballDirX;
+	}
+	if (ball.y <= 0 || ball.y + ball.hitBoxSize >= 500) {
+		ballDirY = -ballDirY;
+	}
+
+	for (block of levelOne) {
+		if (ball.x >= block.x && ball.x <= block.x+blockWidth && ball.y >= block.y && ball.y <= block.y+blockHeight) {
+			// ballDirX = -ballDirX;
+			ballDirY = -ballDirY;
+		}
+		// if (ball.y <= 0 || ball.y + ball.hitBoxSize >= 500) {
+		// 	ballDirY = -ballDirY;
+		// }
+	}
+
+	ball.x += ballDirX * tileSize;
+	ball.y += ballDirY * tileSize;
+}
+
+var dir = 0;
+let player = {x: 0, y: 490};
+
+function clearCanvas() {
+	ctx.fillStyle = board_background;
+	ctx.strokeStyle = board_border;
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
+}
+
+function drawBlock(block) {
+	ctx.fillStyle = block_col;
+	ctx.fillRect(block.x, block.y, blockWidth, blockHeight);
+	ctx.strokeStyle = block_border;
+	ctx.strokeRect(block.x, block.y, blockWidth, blockHeight);
+	ctx.stroke();
+}
+
+function drawPlayer() {
+	ctx.fillStyle = player_col;
+	ctx.strokeStyle = player_border;
+	ctx.fillRect(player.x + 5, player.y + 10, 15, 15);
+	ctx.fillStyle = "black";
+	ctx.fillRect(player.x + 8, player.y + 13, 3, 3);
+	ctx.fillRect(player.x + 14, player.y + 13, 3, 3);
+	ctx.fillRect(player.x + 8, player.y + 21, 9, 2);
+	ctx.strokeRect(player.x + 5, player.y + 10, 15, 15);
+}
+
+function movePlayer(event) {
+	const LEFT_KEY = 37;
+	const RIGHT_KEY = 39;
+	const keyPressed = event.keyCode;
+	let dir = 0;
+
+	if (keyPressed === LEFT_KEY) {
+		if (player.x === 0) return;
+		dir = 1;
+	}
+	else if (keyPressed === RIGHT_KEY) {
+		if (player.x === 475) return;
+		dir = -1;
+	}
+
+	player.x += 25 * -dir;
+
+	let onBlock = false;
+	for (const [row, blockList] of Object.entries(blocks)) {
+		if (player.x / 25 == row) {
+			if (blockList.length - (19 - (player.y / 25)) <= 1) {
+				onBlock = true;
+				player.y = 475 - (blockList.length * 25);
+				break;
+			} else {
+				player.x += 25 * dir;
+			}
+		}
+	}
 }
 
 function reset() {
-  snake = [
-  {x: 300, y: 300},
-  {x: 290, y: 300},
-  {x: 280, y: 300},
-  {x: 270, y: 300},
-  {x: 260, y: 300}
-  ]
-  dx = 10;
-  dy = 0;
-  score = 0;
-  let score_dis = document.getElementById("score_dis");
-  score_dis.innerHTML = "score: "+score;
+	player = {x: 0, y: 475};
+	level = 1;
 }
 
 function main() {
-  if (has_game_ended()) {
-    reset();
-  }
-  if (score == 500) {
-  	alert("you won snake!");
-    reset();
-  }
+	moveBall();
 
-  changing_direction = false;
-  setTimeout(function onTick() {
-    clearCanvas();
-    drawFood();
-    drawPoison();
-    move_snake();
-    drawSnake();
-    main();
-  }, speed)
+	drawLevel();
+
+	setTimeout(function onTick() {
+			clearCanvas();
+			drawBall();
+			main();
+	}, 10);
 }
 
-function clearCanvas() {
-  snakeboard_ctx.fillStyle = board_background;
-  snakeboard_ctx.fillRect(0, 0, snakeboard.width, snakeboard.height);
-}
-
-function drawSnake() {
-  snake.forEach(drawSnakePart)
-}
-
-function drawFood() {
-  snakeboard_ctx.fillStyle = '#00f3ff';
-  snakeboard_ctx.fillRect(food_x+2, food_y+2, 6, 6);
-}
-
-function drawPoison() {
-  snakeboard_ctx.fillStyle = '#ff0000';
-  snakeboard_ctx.fillRect(poison_x+2, poison_y+2, 6, 6);
-}
-
-function drawSnakePart(snakePart) {
-  snakeboard_ctx.fillStyle = snake_col;
-  snakeboard_ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
-}
-
-function has_game_ended() {
-  for (let i = 4; i < snake.length; i++) {
-    if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true
-  }
-  try {
-    const hitLeftWall = snake[0].x < 0;
-    const hitRightWall = snake[0].x > snakeboard.width - 10;
-    const hitToptWall = snake[0].y < 0;
-    const hitBottomWall = snake[0].y > snakeboard.height - 10;
-    return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall
-  } catch (error) {
-    reset();
-  }
-}
-
-function random_food(min, max) {
-  return Math.round((Math.random() * (max-min) + min) / 10) * 10;
-}
-
-function gen_food() {
-  food_x = random_food(0, snakeboard.width - 10);
-  food_y = random_food(0, snakeboard.height - 10);
-  snake.forEach(function has_snake_eaten_food(part) {
-    const has_eaten = part.x == food_x && part.y == food_y;
-    if (has_eaten) gen_food();
-  });
-}
-
-function gen_poison() {
-  poison_x = random_food(0, snakeboard.width - 10);
-  poison_y = random_food(0, snakeboard.height - 10);
-  snake.forEach(function has_snake_eaten_food(part) {
-    const has_eaten = part.x == poison_x && part.y == poison_y;
-    if (has_eaten) gen_poison();
-  });
-}
-
-function change_direction(event) {
-  const LEFT_KEY = 37;
-  const RIGHT_KEY = 39;
-  const UP_KEY = 38;
-  const DOWN_KEY = 40;
-  const SPACE = 32;
-
-  if (changing_direction) return;
-  changing_direction = true;
-  const keyPressed = event.keyCode;
-  const goingUp = dy === -10;
-  const goingDown = dy === 10;
-  const goingRight = dx === 10;
-  const goingLeft = dx === -10;
-  if (keyPressed === LEFT_KEY && !goingRight) {
-    dx = -10;
-    dy = 0;
-  }
-  if (keyPressed === UP_KEY && !goingDown) {
-    dx = 0;
-    dy = -10;
-  }
-  if (keyPressed === RIGHT_KEY && !goingLeft) {
-    dx = 10;
-    dy = 0;
-  }
-  if (keyPressed === DOWN_KEY && !goingUp) {
-    dx = 0;
-    dy = 10;
-  }
-}
-
-function move_snake() {
-  const head = {x: snake[0].x + dx, y: snake[0].y + dy};
-  snake.unshift(head);
-  const has_eaten_food = snake[0].x === food_x && snake[0].y === food_y;
-  const has_eaten_poison = snake[0].x === poison_x && snake[0].y === poison_y;
-  if (has_eaten_food) {
-    for (f = 0; f < grow; f++) {
-      const head = {x: snake[[snake.length - 1]].x - dx, y: snake[snake.length - 1].y - dy};
-      snake.push(head);
-    }
-    score += 10;
-    let score_dis = document.getElementById("score_dis");
-    score_dis.innerHTML = "score: "+score;
-    gen_food();
-  } 
-  else if (has_eaten_poison) {
-    for (f = 0; f < grow + 1; f++) {
-      snake.pop();
-    }
-    score -= 10;
-    let score_dis = document.getElementById("score_dis");
-    score_dis.innerHTML = "score: "+score;
-    gen_poison();
-  } else {
-    snake.pop();
-  }
-}
+main();
