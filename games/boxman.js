@@ -126,7 +126,7 @@ function movePlayer(event) {
 				player.x += 25 * dir;
 			}
 		}
-
+	}
 }
 
 function reset() {
