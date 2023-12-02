@@ -6,7 +6,7 @@ window.addEventListener("keydown", function(e) {
 document.addEventListener("keydown", movePlayer);
 
 const board_border = 'white';
-const board_background = "#cce0ff";
+const board_background = "black";
 const player_col = "#4fe567";
 const player_border = "#4fe567";
 const block_col = "#4444ee";
@@ -49,7 +49,9 @@ function drawBlocks() {
 
 function drawBlock(block) {
 	ctx.fillStyle = block_col;
+	ctx.strokestyle = block_border;
 	ctx.fillRect(block.x, block.y, 25, 25);
+	ctx.strokeRect(block.x, block.y, 25, 25);
 }
 
 function dropBlock() {
@@ -91,6 +93,7 @@ function drawPlayer() {
 	ctx.fillRect(player.x + 8, player.y + 13, 3, 3);
 	ctx.fillRect(player.x + 14, player.y + 13, 3, 3);
 	ctx.fillRect(player.x + 8, player.y + 21, 9, 2);
+	ctx.strokeRect(player.x + 5, player.y + 10, 15, 15);
 }
 
 function movePlayer(event) {
@@ -114,6 +117,7 @@ function movePlayer(event) {
 	for (const [row, blockList] of Object.entries(blocks)) {
 		if (player.x / 25 == row) {
 			if (blockList.length - (19 - (player.y / 25)) <= 1) {
+				onBlock = true;
 				player.y = 475 - (blockList.length * 25);
 				break;
 			} else {
@@ -121,6 +125,10 @@ function movePlayer(event) {
 			}
 		}
 	}
+	if (!onBlock) {
+		player.y = 475;
+	}
+
 }
 
 function reset() {
@@ -129,13 +137,11 @@ function reset() {
 	resetBlocks();
 }
 
-let blockDrop = 0;
-let blockDropSpeed = 5;
-
+let blockDropSpeed = 0;
 function main() {
-	blockDrop += 1;
-	if (blockDrop === 5) {
-		blockDrop = 0;
+	blockDropSpeed += 1;
+	if (blockDropSpeed === 1) {
+		blockDropSpeed = 0;
 		dropBlock();
 	}
 
@@ -146,32 +152,18 @@ function main() {
 			}
 		}
 	}
-	for (const [row, blockList] of Object.entries(blocks)) {
-		if (row == player.x/25) {
-			if (blockList.length != 19 - (player.y / 25)) {
-				alert("you are a wacko cheater that is probably named alex >:(");
-				reset();
-			}
-		}
-	}
 
 	if (player.y === 0) {
-		alert("you won boxman!");
-		alert("this is something not many people see.");
-		alert("you may be wondering,");
-		alert("is this maniac gonna add end credits to a game that really doesn't need them??");
-		alert("and you would be correct.");
 		reset();
 	}
-
-	ctx.fillStyle = "black";
+	ctx.fillStyle = "white";
 	ctx.fillText('score: ' + score, 6, 30);
 	setTimeout(function onTick() {
     	clearCanvas();
     	drawPlayer();
     	drawBlocks();
     	main();
-    }, 10);
+    }, 100);
 }
 
 main();
