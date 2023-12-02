@@ -6,11 +6,11 @@ window.addEventListener("keydown", function(e) {
 document.addEventListener("keydown", movePlayer);
 
 const board_border = 'white';
-const board_background = "#00aedf";
+const board_background = "black";
 const player_col = "#00db4d";
-const player_border = "#00aedf";
+const player_border = "black";
 const block_col = "#4444ee";
-const block_border = "#00aedf";
+const block_border = "black";
 
 const canvas = document.getElementById("board");
 const ctx = canvas.getContext("2d");
