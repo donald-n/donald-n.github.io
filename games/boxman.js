@@ -6,11 +6,11 @@ window.addEventListener("keydown", function(e) {
 document.addEventListener("keydown", movePlayer);
 
 const board_border = 'white';
-const board_background = "black";
-const player_col = "#4fe567";
-const player_border = "#4fe567";
+const board_background = "#00aedf";
+const player_col = "#00db4d";
+const player_border = "#00aedf";
 const block_col = "#4444ee";
-const block_border = "#4fe567";
+const block_border = "#00aedf";
 
 const canvas = document.getElementById("board");
 const ctx = canvas.getContext("2d");
@@ -33,7 +33,7 @@ let player = {x: 0, y: 475};
 
 function clearCanvas() {
 	ctx.fillStyle = board_background;
-	ctx.strokestyle = board_border;
+	ctx.strokeStyle = board_border;
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 }
@@ -49,9 +49,10 @@ function drawBlocks() {
 
 function drawBlock(block) {
 	ctx.fillStyle = block_col;
-	ctx.strokestyle = block_border;
 	ctx.fillRect(block.x, block.y, 25, 25);
+	ctx.strokeStyle = block_border;
 	ctx.strokeRect(block.x, block.y, 25, 25);
+	ctx.stroke();
 }
 
 function dropBlock() {
@@ -87,7 +88,7 @@ function dropBlock() {
 
 function drawPlayer() {
 	ctx.fillStyle = player_col;
-	ctx.strokestyle = player_border;
+	ctx.strokeStyle = player_border;
 	ctx.fillRect(player.x + 5, player.y + 10, 15, 15);
 	ctx.fillStyle = "black";
 	ctx.fillRect(player.x + 8, player.y + 13, 3, 3);
@@ -116,8 +117,6 @@ function movePlayer(event) {
 	let onBlock = false;
 	for (const [row, blockList] of Object.entries(blocks)) {
 		if (player.x / 25 == row) {
-			console.log(19 - (player.y / 25));
-			console.log(blockList.length);
 			if (blockList.length - (19 - (player.y / 25)) <= 1) {
 				onBlock = true;
 				player.y = 475 - (blockList.length * 25);
