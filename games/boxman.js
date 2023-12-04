@@ -149,6 +149,23 @@ function main() {
 			}
 		}
 	}
+	for (const [row, blockList] of Object.entries(blocks)) {
+		if (row == player.x/25) {
+			if (blockList.length != 19 - (player.y / 25)) {
+				alert("you are a wacko cheater that is probably named alex >:(");
+				reset();
+			}
+		}
+	}
+
+	if (player.y === 0) {
+		alert("you won boxman!");
+		alert("this is something not many people see.");
+		alert("you may be wondering,");
+		alert("is this maniac gonna add end credits to a game that really doesn't need them??");
+		alert("and you would be correct.");
+		reset();
+	}
 
 	if (player.y === 0) {
 		reset();
